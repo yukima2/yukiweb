@@ -1,6 +1,6 @@
 puts "1.１０との比較"
 size = 6
-if size >10
+if size > 10
     puts "large"
 elsif size == 10
     puts "eq"
@@ -20,9 +20,7 @@ end
 puts "\n3.abを入れ替えて出力"
 p "a: #{a}"
 p "b: #{b}"
-c = a
-a = b
-b = c
+a, b = b, a
 p "a: #{a}"
 p "b: #{b}"
 
@@ -33,126 +31,124 @@ puts "\n4.0~9まで出力"
 end
 
 puts "\n5.*を増やして出力"
-def putstar(number)
+def star_output(number)
     1.upto(number) do |i|
         puts "*" * i
     end
 end
 
-putstar(5)
+star_output(5)
 
 puts "\n6.123を配列numbersに"
-numbers = [1,2,3]
+a, b, c = 1, 2, 3
+numbers = [a, b, c]
 p numbers
 
 puts "\n7.numbersを出力"
-numbers.each do |number|
-    puts "Number: #{number}"
-end
+numbers.each { |number| p number }
 
 puts "\n8.numbersへ新規追加のみ許可"
-q = 0
-add = 4
-
-# 同じものがあればqを1に
-numbers.each do |number|
-if number == add
-    q = 1
-end
-end
-
-# qが0なら格納
-if q == 0 
-    numbers << add
-end
+add_number = 4
 
 numbers.each do |number|
-    puts "Number: #{number}"
-end
-
-puts "\n9.numbers配列の合計"
-sum = 0
-numbers.each do |number|
-  sum += number
-end
-puts sum
-
-puts "\n10.numbers配列の平均"
-puts sum.to_f / numbers.size
-
-puts "\n11.numbers配列15まで加算"
-numbers = [1,2,3,4,5,6,7]
-p numbers
-sum = 0
-numbers.each do |number|
-  if sum < 15
-    p number
-    sum += number
-  else
-    break
+  if numbers.include?(add_number) == false
+    numbers << add_number
   end
 end
+p numbers
+
+puts "\n9.numbers配列の合計"
+def sum(array)
+  sum = 0
+  array.each do |number|
+    sum += number
+  end
+  p sum
+end
+sum(numbers)
+
+puts "\n10.numbers配列の平均"
+def ave(array)
+  sum = 0
+  array.each do |number|
+    sum += number
+  end
+  p sum.to_f / array.size
+end
+ave(numbers)
+
+
+puts "\n11.numbers配列15まで加算"
+numbers = [1, 2, 3, 4, 5, 6, 7]
+p numbers
+def sum_to15(array)
+sum = 0
+  array.each do |number|
+    if sum < 15
+      p number
+      sum += number
+    else
+      break
+    end
+  end
+end
+sum_to15(numbers)
 
 puts "\n12.連想配列"
-numbers2 = {1 => 1, 2 => 2, 3 => 3}
-p numbers2
+hash_numbers = {":key1" => 1, ":key2" => 2, ":key3" => 3}
+p hash_numbers
 
 puts "\n13.key2の取り出し"
-p numbers2[2]
+p hash_numbers[":key2"]
 
 puts "\n14.key4を追加"
-numbers2[4] = 4
-p numbers2
+hash_numbers[":key4"] = 4
+p hash_numbers
 
 puts "\n15.出力"
-numbers2.each do |name,number|
-  puts "key#{name} is #{number}" 
+hash_numbers.each do |name,number|
+  puts "#{name} is #{number}" 
 end
 
 puts "\n16.全て２倍して出力"
-numbers2.each do |name,number|
+hash_numbers.each do |name,number|
   puts "key#{name}*2 = #{number * 2}" 
 end
 
 puts "\n17.０〜１００のFizzBuzz問題"
 1.upto(100) do |i|
-if i % 3 == 0 && i % 5 == 0
-  puts "fizzbuzz"
-elsif i % 3 != 0 && i % 5 ==0
-  puts "buzz"
-elsif i % 3 == 00 && i % 5 != 0
-  puts "fizz"
-else
-  puts i
-end
+  if i % 3 == 0 && i % 5 == 0
+    puts "fizzbuzz"
+  elsif i % 5 ==0
+    puts "buzz"
+  elsif i % 3 == 0
+    puts "fizz"
+  else
+    puts i
+  end
 end
 
 puts "\n18.配列１２３から配列２４６の作成"
-a1 = [1,2,3]
-a2 = Array.new
-a1.each do |num|
-  num *= 2
-  a2 << num
-end
-p a2
+a1 = [1, 2, 3]
+p a1.map { |num| num *= 2 }
 
 puts "\n19.配列に存在するか確認する"
-numbers3 = [3,2,8]
-p numbers3
-def newadd(array,addnum)
+numbers = [3,2,8]
+p numbers
+def newadd(array, input_number)
   x = false
-array.each do |orinum|
-  if addnum == orinum
+array.each do |origin_number|
+  if input_number == origin_number
     x = true
     break
   end
 end
-puts "#{addnum}は配列に存在する。=>#{x}"
+puts x
 end
-newadd(numbers3,3)
+newadd(numbers,3)
 
 puts "\n20.配列から最小を見つける関数"
-p numbers3
+p numbers
 def min(array)
   min = array[0]
   array.each do |num|
@@ -160,13 +156,13 @@ def min(array)
       min = num
     end
   end
-  puts "最小＝#{min}" 
+  puts min
 end
-min(numbers3)
+min(numbers)
 
 puts "\n21.配列内の重複の有無"
-numbers4 = [1,3,2,3,8,3,2]
-p numbers4
+numbers = [1, 3, 2, 3, 8, 3, 2]
+p numbers
 def exist(array)
   test = {} 
   x = false
@@ -180,10 +176,10 @@ def exist(array)
 end
     p x
 end
-exist(numbers4)
+exist(numbers)
 
 puts "\n22.重複している値の出力"
-def exist2(array)
+def exist_value(array)
   test = {} 
   array.each do |number|
         x = false 
@@ -205,10 +201,10 @@ end
     end
     p test.keys.sort
 end
-exist2(numbers4)
+exist_value(numbers)
 
 puts "\n23.重複する回数の出力"
-def exist3(array)
+def exist_time(array)
   test = {} 
   array.each do |number|
         x = false 
@@ -230,4 +226,4 @@ end
     end
     p test.sort
 end
-exist3(numbers4)
+exist_time(numbers)
