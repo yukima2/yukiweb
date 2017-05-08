@@ -112,7 +112,7 @@ end
 
 puts "\n16.全て２倍して出力"
 hash_numbers.each do |name,number|
-  puts "key#{name}*2 = #{number * 2}" 
+  puts "#{name}*2 = #{number * 2}" 
 end
 
 puts "\n17.０〜１００のFizzBuzz問題"
