@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
   def show
     @user = current_user
-    @aricle = Aricle.find_by(id: @user.id)
-    @commnet = Comment.find_by(id: @user.id)
+    @aricle = Article.find(@user.id)
+    @commnet = Comment.find(@article.id)
 
   end
 end

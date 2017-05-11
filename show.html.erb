@@ -1,0 +1,14 @@
+
+      
+<h1>記事詳細</h1>
+<div class="container">
+    <div class="article">
+     <div class="title"><%= @aritcle.title %></div>
+      <div class="text"><%= @aritcle.text %></div>
+      <div class="comment">
+        <% @comment.each do |comment| %>
+          <%= comment.text %>
+        <% end %>
+      </div>
+    </div>
+</div>
