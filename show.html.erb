@@ -3,8 +3,8 @@
 <h1>記事詳細</h1>
 <div class="container">
     <div class="article">
-     <div class="title"><%= @aritcle.title %></div>
-      <div class="text"><%= @aritcle.text %></div>
+     <div class="title"><%= @aritcle.first.title %></div>
+      <div class="text"><%= @aritcle.first.text %></div>
       <div class="comment">
         <% @comment.each do |comment| %>
           <%= comment.text %>
